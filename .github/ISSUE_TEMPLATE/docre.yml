@@ -1,0 +1,52 @@
+name: Solicitud de Documentacion
+description: Solicita al agente la creacion o actualizacion de documentacion con PR automatico.
+title: "[doc-request] "
+labels:
+  - doc-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Completa este formulario para que el agente genere documentacion y abra un PR automatico.
+
+  - type: input
+    id: target_branch
+    attributes:
+      label: Rama objetivo
+      description: Rama base a la que debe apuntar el PR (por ejemplo main o develop)
+      placeholder: main
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Objetivo de documentacion
+      description: Que se debe documentar y para quien
+      placeholder: Necesitamos documentar el flujo de build y despliegue para nuevos integrantes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Archivos sugeridos
+      description: Lista de archivos a crear o actualizar
+      placeholder: |
+        - readme.md
+        - CONTRIBUTING.md
+        - docs/onboarding.md
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterios de aceptacion
+      description: Como validaremos que la documentacion quedo correcta
+      placeholder: |
+        - Incluye pasos de instalacion y ejecucion
+        - Incluye ejemplos de uso
+        - Lenguaje en espanol
+    validations:
+      required: false
