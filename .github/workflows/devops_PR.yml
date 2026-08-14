@@ -1,15 +1,11 @@
-name: Workflow dotnet build I
+name: Workflow dotnet build I - PullRequest
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-      - develop
-  workflow_dispatch: {}
-
-permissions:
-  id-token: write
-  contents: write
+    types:
+      - opened
 
 jobs:
   extract-version:
