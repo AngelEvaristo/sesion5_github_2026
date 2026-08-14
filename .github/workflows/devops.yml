@@ -23,7 +23,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: extract-version
     steps:
       - name: Muestra version
@@ -41,7 +41,22 @@ jobs:
         run: dotnet restore
 
       - name: build
-        run: dotnet build --no-restore --configuration Release       
+        run: dotnet build --no-restore --configuration Release 
+
+      - name: publish
+        run: dotnet publish --no-build --configuration Release --output ./publish
+
+      - name: Zip artifact
+        run: |
+          cd publish
+          zip -r ../app.zip
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-package
+          path: app.zip
+          retention-days: 5      
 
 
     
