@@ -1,0 +1,11 @@
+name: CI/CD dotnet
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+    ci:
+      uses: https://github.com/AngelEvaristo/sesion5_github_2026_template/.github/workflows/dotnet-ci.yml@main
+      with:
+        dotnetversion: '9.0.x'
+        artifactname: 'app-package'
