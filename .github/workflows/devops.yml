@@ -70,5 +70,15 @@ jobs:
           path: ${{ github.event.inputs.artifactname }}.zip
           retention-days: 5      
 
-
+deploy:
+  runs-on: ubuntu-latest
+  needs: build
+  environment: develop
+  steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ github.event.inputs.artifactname }}
+    - name: Mostrar varable
+      run: echo "Variable a mostrar en ${{ vars.VARIABLE_GITHUB }}"
     
