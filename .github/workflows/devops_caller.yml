@@ -9,3 +9,4 @@ jobs:
       with:
         dotnetversion: '9.0.x'
         artifactname: 'app-package'
+        environment: 'develop'
