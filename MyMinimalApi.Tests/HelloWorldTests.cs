@@ -10,7 +10,7 @@ public class HelloWorldTests
         using var client = application.CreateClient();
 
         var response = await client.GetStringAsync("/");
-        Assert.Equal("Hello World!", response);
+        Assert.Equal("Hello World of Github Actions!", response);
 
     }
 }
