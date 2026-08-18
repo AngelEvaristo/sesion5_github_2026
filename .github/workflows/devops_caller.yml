@@ -3,6 +3,11 @@ name: CI/CD dotnet
 on:
   workflow_dispatch: {}
 
+permissions:
+  id-token: write
+  contents: write
+
+
 jobs:
     ci:
       uses: AngelEvaristo/sesion5_github_2026_template/.github/workflows/dotnet-ci.yml@main
