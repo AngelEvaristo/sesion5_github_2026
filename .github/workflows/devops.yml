@@ -5,7 +5,16 @@ on:
     branches:
       - main
       - develop
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      dotnetversion:
+        description: 'Version to build'
+        required: false
+        default: '8.0.x'
+      artifactname:
+        description: 'Artifact name'
+        required: false
+        default: 'app-package'  
 
 permissions:
   id-token: write
@@ -39,7 +48,7 @@ jobs:
       - name: Install dotnet
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: ${{ github.event.inputs.dotnetversion }}
 
       - name: Restore
         run: dotnet restore
@@ -51,14 +60,14 @@ jobs:
         run: dotnet publish --no-build --configuration Release --output ./publish
 
       - name: Zip artifact
-        run: Compress-Archive -Path ./publish/* -DestinationPath ./app.zip
+        run: Compress-Archive -Path ./publish/* -DestinationPath ./${{ github.event.inputs.artifactname }}.zip
         shell: pwsh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-package
-          path: app.zip
+          name: ${{ github.event.inputs.artifactname }}
+          path: ${{ github.event.inputs.artifactname }}.zip
           retention-days: 5      
 
 
